@@ -1,0 +1,49 @@
+{
+  "name": "@salvobee/laravel-resource-route",
+  "version": "1.0.0",
+  "description": "Resolve Laravel-style resource route names (photos.index, photos.show, ...) to URLs with optional nesting and query strings.",
+  "keywords": [
+    "laravel",
+    "routes",
+    "resource",
+    "resolver",
+    "ziggy",
+    "typescript",
+    "url"
+  ],
+  "author": "Salvo Bee",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salvobee/laravel-resource-route.git"
+  },
+  "homepage": "https://github.com/salvobee/laravel-resource-route#readme",
+  "bugs": {
+    "url": "https://github.com/salvobee/laravel-resource-route/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --dts --format esm,cjs --sourcemap --clean",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.6.3",
+    "rimraf": "^6.0.1"
+  }
+}
