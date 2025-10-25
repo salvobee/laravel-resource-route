@@ -1,6 +1,6 @@
 {
   "name": "@salvobee/laravel-resource-route",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "Resolve Laravel-style resource route names (photos.index, photos.show, ...) to URLs with optional nesting and query strings.",
   "keywords": [
     "laravel",
