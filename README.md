@@ -2,17 +2,38 @@
 
 A tiny TypeScript utility that resolves **Laravel resource route names** to paths, with optional nested prefixes and querystring handling.
 
-It mirrors Laravel's conventional resource actions:
+## ⚠️ Important
 
-| Verb      | URI                      | Action   | Route Name        |
-|-----------|--------------------------|----------|-------------------|
-| GET       | /photos                  | index    | photos.index      |
-| GET       | /photos/create           | create   | photos.create     |
-| POST      | /photos                  | store    | photos.store      |
-| GET       | /photos/{photo}          | show     | photos.show       |
-| GET       | /photos/{photo}/edit     | edit     | photos.edit       |
-| PUT/PATCH | /photos/{photo}          | update   | photos.update     |
-| DELETE    | /photos/{photo}          | destroy  | photos.destroy    |
+This resolver is **strictly based on Laravel’s default resource route conventions**.  
+It does **not** support custom or renamed routes.
+
+In other words, it only works correctly if your backend defines routes using the standard
+[`Route::resource()`](https://laravel.com/docs/routing#resource-routes) or
+[`Route::apiResource()`](https://laravel.com/docs/routing#api-resource-routes)
+helpers, which automatically generate the following names and URI patterns:
+
+| Verb | URI | Action | Route Name |
+|------|-----|---------|-------------|
+| GET | /photos | index | photos.index |
+| GET | /photos/create | create | photos.create |
+| POST | /photos | store | photos.store |
+| GET | /photos/{photo} | show | photos.show |
+| GET | /photos/{photo}/edit | edit | photos.edit |
+| PUT/PATCH | /photos/{photo} | update | photos.update |
+| DELETE | /photos/{photo} | destroy | photos.destroy |
+
+If your Laravel routes use **different names or structures** —  
+for example:
+
+```php
+Route::get('/pictures/{id}', 'PhotoController@show')->name('photos.display');
+```
+
+then this resolver cannot infer the correct path from the route name alone,
+because it assumes the standard `{resource}.{action}` pattern (e.g. `photos.show` → `/photos/{photo}`).
+
+This design keeps the resolver lightweight, predictable, and framework-agnostic —
+it’s meant as a simple fallback for projects that already follow Laravel’s default resource routing style.
 
 ## Install
 
